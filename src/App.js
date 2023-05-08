@@ -27,8 +27,8 @@ function App() {
       response: token,
     };
     const response = await window
-      // .fetch("/api/testCaptcha", {
-      .fetch("http://localhost:7071/api/testCaptcha", {
+      .fetch("/api/testCaptcha", {
+      // .fetch("http://localhost:7071/api/testCaptcha", {
         method: `POST`,
         body: JSON.stringify(reCaptchaData),
       })
