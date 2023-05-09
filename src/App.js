@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const reCaptchaValidation = async () => {
+    setIsLoading(true);
     // eslint-disable-next-line no-undef
     grecaptcha.ready(() => {
       try {
@@ -28,18 +30,30 @@ function App() {
     };
     const response = await window
       .fetch("/api/testCaptcha", {
-      // .fetch("http://localhost:7071/api/testCaptcha", {
+        // .fetch("http://localhost:7071/api/testCaptcha", {
         method: `POST`,
         body: JSON.stringify(reCaptchaData),
       })
       .then((res) => res.json());
     setData(response.success);
+    setIsLoading(false);
   };
 
+  useEffect(() => {
+    if (data) {
+      setTimeout(() => {
+        setData(null);
+      }, 3000);
+    }
+  }, [data]);
+
   return (
-    <div>
-      <button onClick={() => reCaptchaValidation()}>Try recaptcha</button>
-      <p>{data && "Success"}</p>
+    <div className="wrapper">
+      <div className="container">
+        <button onClick={() => reCaptchaValidation()}>Validate</button>
+        <p className="success">{data && "Success!"}</p>
+        <p>{isLoading && "Loading..."}</p>
+      </div>
     </div>
   );
 }
