@@ -30,7 +30,7 @@ function App() {
     };
     const response = await window
       .fetch("/api/testCaptcha", {
-        // .fetch("http://localhost:7071/api/testCaptcha", {
+      // .fetch("http://localhost:7071/api/testCaptcha", {
         method: `POST`,
         body: JSON.stringify(reCaptchaData),
       })
@@ -46,13 +46,6 @@ function App() {
       }, 3000);
     }
   }, [data]);
-
-  const testAPICall = async () => {
-    const response = await window
-      .fetch("/api/HttpTrigger1")
-      .then((res) => res.json());
-    console.log('RESPONSE', response);
-  };
 
   return (
     <div className="wrapper">
