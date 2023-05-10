@@ -47,6 +47,13 @@ function App() {
     }
   }, [data]);
 
+  const testAPICall = async () => {
+    const response = await window
+      .fetch("/api/HttpTrigger1")
+      .then((res) => res.json());
+    console.log('RESPONSE', response);
+  };
+
   return (
     <div className="wrapper">
       <div className="container">
